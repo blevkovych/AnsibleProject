@@ -1,0 +1,12 @@
+[webservers]
+WebServer1 ansible_host=webserver_private_ip DB_NAME=wordpress1 
+WebServer2 ansible_host=webserver_private_ip  DB_NAME=wordpress2 
+
+#and so on you can add as many webservers as you want
+
+[database]
+DataBase ansible_host=database_private_ip
+
+[loadbalancer]
+LoadBalancer ansible_host=loadbalancer_private_ip
+

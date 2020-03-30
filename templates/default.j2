@@ -1,0 +1,13 @@
+upstream website {
+{% for host in groups['webservers'] %}
+  server {{ hostvars[host].ansible_host }};
+{% endfor %}  
+}
+server {
+  listen 80;
+  add_header Cache-Control "no-store"; #Opera behaving like crazy
+  location / {
+    proxy_pass http://website;
+  }
+}
+

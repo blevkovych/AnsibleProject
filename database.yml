@@ -1,0 +1,49 @@
+---
+- name: Install and configure MariaDB
+  hosts: database
+  become: true
+
+  tasks:
+  - name: Install MariaDB and Python-pip
+    apt: name={{ item }} state=latest update_cache=true
+    loop:
+      - mariadb-client
+      - mariadb-server
+      - python3-pip
+
+  - name: pymysql
+    pip: name=pymysql state=present
+
+  - name: Copy 50-server.cnf
+    copy: src=templates/50-server.cnf dest=/etc/mysql/mariadb.conf.d 
+    notify: Restart MariaDB
+
+  - name: Start and enable MariaDB
+    service: name=mariadb state=started enabled=true
+
+  - name: Create wordpress database
+    become: true
+    mysql_db:
+      login_user: "root"
+      login_unix_socket: /var/run/mysqld/mysqld.sock
+      name: "{{ hostvars[item]['DB_NAME'] }}"
+      login_host: localhost
+      state: present 
+    loop: "{{ groups['webservers'] }}"
+
+  - name: Create user for database 
+    mysql_user: 
+      name: "{{ DB_USER }}"
+      password: "{{ DB_PASSWORD }}"
+      priv: "{{ hostvars[item]['DB_NAME'] }}.*:ALL" 
+      login_user: root 
+      login_unix_socket: /var/run/mysqld/mysqld.sock 
+      host: "{{ hostvars[item]['ansible_host'] }}"
+      state: present
+    loop: "{{ groups['webservers'] }}"
+
+  handlers:
+
+  - name: Restart MariaDB
+    service: name=mariadb state=restarted
+

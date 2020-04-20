@@ -2,7 +2,7 @@ My AnsibleProject
 
 In this project I created 3 playbooks. 
   First one called database.yml which you can play to set up MariaDB on the instance as remote database for wordpress
-also it will create databases and users for every webservers that you entered in hosts.txt.
+also it will create databases and users for every webserver that you entered in hosts.txt.
   Second one called webservers.yml when playing it will set up Apache webserver, PHP and unarchive wordpress into /var/www/html 
 also it will create wp-config.php for every webserver depending on database you want it to connect.
   Third one called loadbalancer.yml this playbook will install a nginx on the instance you entered and configure it so it will

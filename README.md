@@ -11,7 +11,7 @@ balance between two or more webservers which are defined in hosts.txt below "[we
 To make everything work you need:
 1) change hosts.txt
   You have to insert your instance ip in every ansible_host depending on what this instance is gonna be. 
-Also you can insert as many webservers as you want.
+Note# you can insert as many webservers as you want.
 2) change group_vars/all
   Insert name of your user as ansible_user, path to ssh key (which you need to connect to your instances) as ansible_ssh_private_key_file, 
 database user as DB_USER and database user's password as DB_PASSWORD.

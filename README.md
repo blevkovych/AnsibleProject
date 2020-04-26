@@ -19,4 +19,5 @@ database user as DB_USER and database user's password as DB_PASSWORD.
 for each group that are different from ['all']. 
 
 After all that you can execute ansible playbooks one by one in the order you want or you can execute inst_all.sh.
+
 This playbook was created for Ubuntu, 18.04 LTS

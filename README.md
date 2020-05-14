@@ -1,5 +1,4 @@
-My AnsibleProject
-
+# Okay this is epic.
 In this project I created 3 playbooks. 
   First one called database.yml which you can play to set up MariaDB on the instance as remote database for wordpress
 also it will create databases and users for every webserver that you entered in hosts.txt.
